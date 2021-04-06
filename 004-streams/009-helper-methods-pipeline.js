@@ -10,11 +10,11 @@ const writeStream = createWriteStream(`${FILE_NAME}.encoded`);
 
 const encoder = new CaesarCipherEncode(1);
 
-pipeline(
+pipeline( // корректно обрабатывает ошибки и не запускает последующие скрипты
   readStream,
   encoder,
   writeStream,
-  (err, data) => {
+  (err, data) => { // все ошибки валятся сюда
     if (err) {
       console.error(err.message)
     } else {
@@ -25,6 +25,7 @@ pipeline(
 const {promisify} = require('util');
 const pipelinePromise = promisify(pipeline);
 
+// await pipelinePromise(readStream, encoder, writeStream)
 pipelinePromise(readStream, encoder, writeStream)
   .then(() => console.log("Done!"))
   .catch(err => console.error(err.message));

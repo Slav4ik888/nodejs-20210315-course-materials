@@ -7,9 +7,15 @@ class MyEmitter extends EventEmitter {
       process.nextTick(() => {
         this.emit('error', new TypeError('should be a string'))
       })
+      // setTimeout(() => {
+      //   this.emit('error', new TypeError('should be a string'))
+      // }, 0)
     }
   }
 }
+
+// Отловит любую ошибку, но очень грубый
+// process.on(`uncaughtException`, console.error.bind(null, 'handler'));
 
 const ee = new MyEmitter(1);
 

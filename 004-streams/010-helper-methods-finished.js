@@ -14,7 +14,7 @@ readStream
   .pipe(encoder)
   .pipe(writeStream);
 
-finished(readStream, err => {
+finished(readStream, err => { // коллбек вызывается в конце
   if (err) {
     console.log(err.message);
   } else {

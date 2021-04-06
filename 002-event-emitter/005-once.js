@@ -5,8 +5,8 @@ const ee = new EventEmitter();
 
 setTimeout(() => {
   // ee.emit('event-name', 'data');
-  // ee.emit('error', new Error('something went wrong'));
-  ac.abort()
+  ee.emit('error', new Error('something went wrong'));
+  // ac.abort()
 }, 10);
 
 (async () => {

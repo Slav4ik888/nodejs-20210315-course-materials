@@ -48,16 +48,18 @@ describe('APIClient', () => {
       const clientId = 'clientId';
       const requestMock = sinon.mock(axios)
         .expects('request')
-        .once()
-        .resolves(getRandomPhotoResponse())
+        .once() // Должен быть вызван 1 раз или twice
+        .resolves(getRandomPhotoResponse()) // Вернёт с этими данными
 
       const client = new APIClient(clientId, axios)
 
       const result = await client.getRandomPhoto()
+      console.log('result: ', result);
 
       expect(result).to.be.equal(getRandomPhotoResponse().urls.raw)
 
-      requestMock.verify()
+      requestMock.verify() // чтобы удостовериться что тест вызвался нужное кол-во раз
+      // + восстанавливает оригинальное поведение axios или  sinon.restore()
     });
 
     it('should return an error if any', async () => {
@@ -65,6 +67,7 @@ describe('APIClient', () => {
       const error = new Error('something went wrong');
       error.code = 401;
       const http = {
+        // stub создаёт функцию
         request: sinon.stub().onFirstCall().rejects(error)
       }
 

@@ -21,7 +21,7 @@ server.on("listening", () => {
   console.log('Server started')
 });
 
-server.listen(3000);
+server.listen(7000);
 
-// for (let i = 0; i < 5; i++) fetch(`http://localhost:3000/?r=${Math.random()}`);
-// ab -n 5 -c 5 http://localhost:3000/
+// for (let i = 0; i < 5; i++) fetch(`http://localhost:7000/?r=${Math.random()}`);
+// ab -n 5 -c 5 http://localhost:7000/

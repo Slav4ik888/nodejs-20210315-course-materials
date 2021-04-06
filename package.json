@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-20210315-course-materials",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slav4ik888/nodejs-20210315-course-materials.git"
+  },
+  "author": "sl@v4ik888",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Slav4ik888/nodejs-20210315-course-materials/issues"
+  },
+  "homepage": "https://github.com/Slav4ik888/nodejs-20210315-course-materials#readme"
+}

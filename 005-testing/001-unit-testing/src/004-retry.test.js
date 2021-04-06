@@ -8,8 +8,8 @@ describe('retry', () => {
   // before
   // after
 
-  // beforeEach
-  afterEach(() => {
+  // beforeEach перед каждым тестом восстанавливаем состояние
+  afterEach(() => { //после каждого теста восстанавливаем состояние
     sinon.restore();
   });
 
@@ -18,15 +18,15 @@ describe('retry', () => {
     const timeout = 0;
     const expected = 42;
     const fn = sinon.stub().returns(expected);
-    const self = {}
-    const args = [1, 2, 3, 4]
+    const self = {};
+    const args = [1, 2, 3, 4];
 
-    const actual = await retry(timeout, fn, self, ...args)
+    const actual = await retry(timeout, fn, self, ...args); 
 
     expect(actual).to.be.equal(expected);
-    expect(fn).to.have.been.called;
-    expect(fn).calledOn(self); // this
-    expect(fn).calledWithExactly(...args);
+    expect(fn).to.have.been.called; // to.not.have.been.called
+    expect(fn).calledOn(self); // this проверяет с каким контекстом или not.calledOn
+    expect(fn).calledWithExactly(...args); // что ф-я была вызвана с этими аргументами или not.calledWithExactly
   });
 
   it('should call passed function second time if error has been returned after the first call', async () => {
@@ -60,9 +60,9 @@ describe('retry', () => {
 
     const actualPromise = retry(timeout, fn, self, ...args)
 
-    await Promise.resolve()
+    await Promise.resolve() // Разорвать текущий синхронный блок кода
 
-    timers.next()
+    timers.next() // чтобы перемотать код к следующему таймеру
 
     const actual = await actualPromise;
 

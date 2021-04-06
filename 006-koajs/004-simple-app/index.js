@@ -14,8 +14,8 @@ const bootstrap = require('./middleware');
  * POST /books
  *
  * Update a book
- * PUT /books/:id
- * PATCH /books/:id
+ * PUT /books/:id      // полностью затираем
+ * PATCH /books/:id    // частично обновляем
  *
  * Delete a book
  * DELETE /books/:id

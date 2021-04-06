@@ -9,6 +9,8 @@ const readStream = createReadStream(FILE_NAME, {highWaterMark: 2 ** 16}); // 64k
 
 let totalSize = 0;
 
+// событие readable может не произойти если произошла какая-то ошибка
+// нужен обработчик ошибок on(`error`)
 readStream.on('readable', function () {
   let chunk = readStream.read(/*READ_SIZE*/);
   while (null !== chunk) {

@@ -2,6 +2,7 @@ const parse = require('csv-parse');
 const {createReadStream} = require('fs');
 const {Transform, Writable, pipeline} = require('stream')
 
+// Задача класса - накопление данных
 class Collector extends Transform {
   #batchSize = 0;
   #buffer = []
@@ -25,6 +26,7 @@ class Collector extends Transform {
   }
 
   _flush(callback) {
+    // Всё что осталось внутри буфера сбрасываем дальше
     this.#flushBuffer()
     callback(null)
   }
@@ -39,6 +41,7 @@ class Collector extends Transform {
   }
 }
 
+// Класс умеющий записывать
 class DBBatchWriter extends Writable {
 
   constructor(options = {}) {
@@ -62,14 +65,18 @@ const parser = parse({
 
 const source = createReadStream('./data/source.csv')
 
+// Задача класса - накопление данных и как только лимит достигнут данные переда/тся дальше
 const collector = new Collector({batchSize: 50});
 
+// Класс умеющий записывать
 const writer = new DBBatchWriter();
 
 pipeline(
-  source,
-  parser,
-  collector,
+  source, // Читаем из источника
+  parser, // Построчно парсит и передаёт дальше
+  // Получает на вход байты, преобразует их в объект и передаёт уже объект
+  
+  collector,// Накапливает какое-то кол-во данных и дальше передаёт массив объектов
   writer,
   err => {
     if (err) {

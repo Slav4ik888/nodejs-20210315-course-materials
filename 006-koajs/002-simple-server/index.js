@@ -5,16 +5,31 @@ const app = new Koa();
 
 app.use((ctx, next) => {
   // Request =================================================
-  // ctx.req -> http.IncomingMessage
+  // ctx.req -> http.IncomingMessage // Если понадобился стандартный req из NodeJs 
   // ctx.request -> koa.Request
 
   console.log('url: ', ctx.request.URL); // = {}
-  console.log('query: ', ctx.request.querystring); // = param=value
-  console.log('path: ', ctx.request.path); // = /path
-  console.log('query params', ctx.request.query); // { param:"value" }
+  // URL {
+  //   href: 'http://localhost:3000/3-law.txt',
+  //   origin: 'http://localhost:3000',
+  //   protocol: 'http:',
+  //   username: '',
+  //   password: '',
+  //   host: 'localhost:3000',
+  //   hostname: 'localhost',
+  //   port: '3000',
+  //   pathname: '/3-law.txt',
+  //   search: '',
+  //   searchParams: URLSearchParams {},
+  //   hash: ''
+  // }
+
+  // console.log('query: ', ctx.request.querystring); // = param=value
   console.log('method: ', ctx.request.method); // GET
-  console.log('headers: ', ctx.request.headers, ctx.headers); //ctx.header
-  console.log('headers: ', ctx.request.get('user-agent'));
+  console.log('path: ', ctx.request.path); // = /path
+  // console.log('query params', ctx.request.query); // { param:"value" }
+  // console.log('headers: ', ctx.request.headers, ctx.headers); //ctx.header
+  // console.log('headers: ', ctx.request.get('user-agent')); // Возможность получить значение конкретного заголовка
 
   // Aliases: https://github.com/koajs/koa/blob/master/docs/api/context.md#request-aliases
   // ctx.request.headers => ctx.headers
@@ -25,14 +40,21 @@ app.use((ctx, next) => {
   // ctx.acceptsEncodings / ctx.acceptsCharsets / ctx.acceptsLanguages
   // Accept: text/plain, application/json, text/html
   // switch (ctx.accepts('json', 'html', 'text')) {
-  //   case 'json': break;
-  //   case 'html': break;
-  //   case 'text': break;
+  //   case 'json': 
+  //     console.log('json');
+  //     break;
+  //   case 'html':
+  //     console.log('html');
+  //     break;
+  //   case 'text':
+  //     console.log('text');
+  //     break;
+    
   //   default: ctx.throw(406, 'json, html, or text only');
   // }
 
   // Response =================================================
-  // ctx.res -> http.ServerResponse
+  // ctx.res -> http.ServerResponse  // Если нужен стандартный вариант
   // ctx.response -> koa.Response
 
   ctx.response.status = 200;
@@ -46,7 +68,7 @@ app.use((ctx, next) => {
 
   // ctx.response.set('content-type', 'application/json');
 
-  // ctx.response.redirect('https://google.com')
+  // ctx.response.redirect('https://google.com') // Отправка пользователя на другую страницу 
 
   // Aliases: https://github.com/koajs/koa/blob/master/docs/api/context.md#response-aliases
   // ctx.response.body => ctx.body

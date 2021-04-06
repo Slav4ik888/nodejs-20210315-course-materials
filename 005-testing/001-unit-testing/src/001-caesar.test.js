@@ -43,3 +43,5 @@ describe('caesar', () => {
   });
 
 });
+
+// npm test -- --grep=^caesar 

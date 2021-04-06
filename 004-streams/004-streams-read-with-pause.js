@@ -9,10 +9,10 @@ let totalSize = 0;
 
 readStream.on('data', chunk => {
   console.log(`Read ${chunk.length} bytes`);
-  readStream.pause();
+  readStream.pause(); // Останавливаем чтение
 
   setTimeout(() => {
-    readStream.resume();
+    readStream.resume(); // Восстанавливаем чтение
   }, 1000);
 
   totalSize += chunk.length;
