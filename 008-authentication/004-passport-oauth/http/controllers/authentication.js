@@ -14,7 +14,7 @@ async function register(ctx, next) {
 }
 
 function logout(ctx, next) {
-  ctx.logout();
+  ctx.logout(); // Вроде для того, чтобы удалять куки
   ctx.status = 200;
 }
 

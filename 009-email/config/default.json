@@ -1,0 +1,10 @@
+{
+  "mailer": {
+    "host": "smtp.ethereal.email",
+    "port": 587,
+    "auth": {
+      "user": "pierre.jacobson37@ethereal.email",
+      "pass": "YzpxRjUXjpXnQpRBPB"
+    }
+  }
+}

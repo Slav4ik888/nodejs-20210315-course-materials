@@ -33,6 +33,7 @@ const userSchema = new Schema({
   },
 }, {});
 
+// Индексы можно создавать по 2м полям 1 и -1 это сортировка
 userSchema.index({login: 1, password: -1});
 
 const User = mongoose.model('user', userSchema);

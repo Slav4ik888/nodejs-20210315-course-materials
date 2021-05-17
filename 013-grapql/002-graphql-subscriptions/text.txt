@@ -1,0 +1,62 @@
+query GetAllUsers {
+  users {
+    id
+    name
+    position
+  }
+}
+
+query GetAllIncidents {
+  incidents {
+    ...incidentData
+  }
+}
+
+mutation CreateIncident {
+  createIncident(incident: {name: "FAIL ABC"}) {
+    ...incidentData
+  }
+}
+
+mutation UpdateIncidentStatus {
+  updateIncidentStatus(
+    id: "608d0964d2c4c21483f511cf", 
+    status: OPEN
+  ) {
+    ...incidentData
+  }
+}
+
+fragment incidentData on Incident {
+  id
+  priority
+  name
+  description
+  status
+  assignee {
+    id
+    name
+  }
+  watch {
+    id
+    name
+  }
+}
+
+mutation Watch {
+  watchIncident(
+    id: "608d0964d2c4c21483f511cf"
+    # userId: ""
+  ) {
+    ...incidentData
+  }
+}
+
+mutation Assign {
+  assignIncident(
+    id: "608d0964d2c4c21483f511cf"
+    # userId: ""
+  ) {
+    ...incidentData
+  }
+}

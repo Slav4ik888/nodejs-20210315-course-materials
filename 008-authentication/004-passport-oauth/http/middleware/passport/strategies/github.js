@@ -8,7 +8,9 @@ module.exports = new GitHubStrategy({
   callbackURL: `http://localhost:${config.get('app.port')}/api/oauth/github/callback`,
   scope: ['user:email'],
 }, async (accessToken, refreshToken, profile, done) => {
-  console.dir(profile, {depth: Infinity})
+  // Посмотреть пришедший профиль (данные )
+  console.dir(profile, { depth: Infinity })
+  
   try {
     const ghUser = {
       oauth: [{
@@ -30,8 +32,8 @@ module.exports = new GitHubStrategy({
       },
       ghUser,
       {
-        new: true,
-        upsert: true
+        new: true, // Если пользователь не найден то создаём нового
+        upsert: true 
       });
     done(null, user);
   } catch (e) {

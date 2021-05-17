@@ -9,7 +9,8 @@ const url = `mongodb://localhost:27017/${dbName}`;
  * For all available options see
  * @link https://mongoosejs.com/docs/api/mongoose.html#mongoose_Mongoose-set
  */
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+// На время отладки выводит в консоль все запросы
 mongoose.set('debug', true);
 
 const userSchema = new Schema({
@@ -38,7 +39,23 @@ const User = mongoose.model('user', userSchema);
 
 (async function () {
   await User.deleteMany({});
-  const user = new User({
+  // const user = new User({
+  //   name: 'Paul',
+  //   email: 'paul@atredias.com',
+  //   login: 'muaddib',
+  //   dateOfBirth: new Date('2000-01-01'),
+  //   aliases: ["Usul", "Muad'Dib", "The Preacher"],
+  //   foo: {
+  //     bar: {
+  //       baz: true,
+  //     }
+  //   }
+  // });
+  // id уже есть, ДО сохранения в базу данных
+  // console.log(user.id);
+
+  // await user.save();
+  const user = await User.create({
     name: 'Paul',
     email: 'paul@atredias.com',
     login: 'muaddib',
@@ -50,14 +67,8 @@ const User = mongoose.model('user', userSchema);
       }
     }
   });
-  console.log(user.id);
 
-  await user.save();
-  // const user = await User.create({
-  //   name: 'Paul',
-  //   email: 'paul@atredias.com',
-  //   login: 'muaddib'
-  // });
+  console.log(user.id);
 
   // user.login = 'muad-dib';
   // await user.save();

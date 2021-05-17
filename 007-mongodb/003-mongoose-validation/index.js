@@ -26,6 +26,7 @@ const userSchema = new Schema({
     type: Date,
   }
 }, {});
+
 const User = mongoose.model('user', userSchema);
 
 (async function () {
@@ -40,7 +41,7 @@ const User = mongoose.model('user', userSchema);
     });
 
     await paul.save();
-    // await paul.validate();
+    // await paul.validate(); // Если нужно провалидировать без сохранения 
 
     const vladimir = new User({
       name: 'Vladimir',

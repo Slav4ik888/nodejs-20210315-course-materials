@@ -81,7 +81,18 @@ app.use((ctx, next) => {
   // ctx.cookies.set('my-cookie2', 'test', {signed: false, http: true/*, secure: true*/});
 });
 
+// node --inspect index.js
 
 app.listen(3000, () => {
   console.log('Server started');
+});
+
+process.on(`uncaughtException`, (error, origin) => {
+  // Сюда попадают все неотловленные ошибки
+  // fs.writeFileSync(); // И сохранить в файл....
+});
+
+process.on(`unhandledRejection`, error => {
+  // Сюда попадают все  необработанные rejetion promise 
+  // Возможно не совсем так
 });
